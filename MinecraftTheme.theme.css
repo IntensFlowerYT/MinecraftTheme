@@ -1,21 +1,29 @@
 /**
  * @name MINECRAFT THEME FREE
  * @author IntensFlowerYT
- * @description Dark Minecraft theme with green accents, blocky aesthetics, custom home icon and background.
- * @version 2.1.0
+ * @description Dark Minecraft theme with green accents, blocky aesthetics, custom font, and custom background.
+ * @version 2.2.0
  * @source https://github.com/IntensFlowerYT/MinecraftTheme
  */
 
+/* Importation de la police d'écriture Minecraft */
+@import url('https://fonts.cdnfonts.com/css/minecraft-4');
+
 :root {
-    /* Couleurs Minecraft (Vert Herbe / Redstone / Obscurité) */
+    /* Couleurs Minecraft (Vert Herbe / Roche / Obscurité) */
     --mc-green: #55FF55;
     --mc-green-dark: #2e7d32;
     --mc-green-bright: #4caf50;
     --mc-bg: #121212;
-    --mc-panel: #1e1e1e;
-    --mc-panel-hover: #2a2a2a;
+    --mc-panel: rgba(25, 25, 25, 0.85); /* Rendu semi-transparent pour voir le fond */
+    --mc-panel-hover: rgba(42, 42, 42, 0.9);
     --mc-text: #ffffff;
     --mc-muted: #aaaaaa;
+    
+    /* Variables de polices par défaut de Discord écrasées */
+    --font-primary: 'Minecraft', 'gg sans', sans-serif !important;
+    --font-display: 'Minecraft', 'gg sans', sans-serif !important;
+    --font-headline: 'Minecraft', 'gg sans', sans-serif !important;
     
     /* Images depuis votre dossier assets GitHub */
     --mc-home-icon: url("https://raw.githubusercontent.com/IntensFlowerYT/MinecraftTheme/main/assets/minecraft-discord.png");
@@ -23,13 +31,19 @@
     --mc-dirt-bg: url("https://raw.githubusercontent.com/IntensFlowerYT/MinecraftTheme/main/assets/dirt.png");
 }
 
-/* Base & Fond principal */
-.theme-dark,
-body,
-[class*="appMount"],
-[class*="bg-"] {
+/* Base, Fond principal & Application de la police */
+body, [class^="bg_"], * {
+    font-family: var(--font-primary) !important;
+}
+
+/* Configuration propre du fond d'écran global */
+body, [class^="bg_"] {
     background-color: var(--mc-bg) !important;
-    color: var(--mc-text);
+    background-image: var(--mc-chat-bg) !important;
+    background-position: center !important;
+    background-size: cover !important;
+    background-attachment: fixed !important;
+    background-repeat: no-repeat !important;
 }
 
 ::selection {
@@ -37,31 +51,27 @@ body,
     color: #000;
 }
 
-/* Panneaux latéraux (Liste des canaux, membres, etc.) */
-[class*="sidebar"],
-[class*="privateChannels"],
-[class*="panels"],
-[class*="containerDefault"] {
+/* Transparence des zones principales pour laisser apparaître le fond Minecraft partout */
+[class^="appMount_"],
+[class^="app_"],
+[class*="chat_"],
+[class*="chatContent_"],
+[class*="membersWrap_"],
+[class*="contentRegion_"],
+[class*="pageWrapper_"] {
+    background: transparent !important;
+}
+
+/* Panneaux latéraux semi-transparents (Liste des canaux, membres, etc.) */
+[class*="sidebar_"],
+[class*="privateChannels_"],
+[class*="panels_"],
+[class*="containerDefault_"] {
     background-color: var(--mc-panel) !important;
 }
 
-/* Transparence des zones principales pour laisser apparaître le fond Minecraft */
-[class*="chat"],
-[class*="chatContent"],
-[class*="membersWrap"],
-[class*="contentRegion"] {
-    background-color: transparent !important;
-}
-
-/* Image de fond Minecraft dans la zone de discussion */
-[class*="chat"] {
-    background-image: var(--mc-chat-bg) !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    background-size: cover !important;
-}
-
 /* Bouton d'accueil Discord (Logo personnalisé + Fond de bloc Dirt) */
+[class*="tutorialContainer_"] [class*="childWrapper_"],
 [class*="tutorialContainer"] [class*="childWrapper"] {
     background-color: transparent !important;
     background-image: var(--mc-home-icon), var(--mc-dirt-bg) !important;
@@ -128,16 +138,19 @@ a:hover,
     color: var(--mc-green-bright) !important;
 }
 
-/* Zone de saisie de message (Tchat) */
-[class*="channelTextArea"] {
-    background-color: rgba(20, 20, 20, 0.85) !important;
+/* CORRECTION DU BUG : Zone de saisie de message (Tchat, GIF, Emojis) */
+[class*="channelTextArea_"] {
+    background-color: transparent !important;
+}
+
+[class*="scrollableContainer_"] {
+    background-color: rgba(20, 20, 20, 0.95) !important;
     border: 2px solid #333333 !important;
-    border-radius: 4px !important;
-    backdrop-filter: blur(4px);
+    border-radius: 4px !important; /* Style bloc */
     transition: border-color .18s ease, box-shadow .18s ease;
 }
 
-[class*="channelTextArea"]:focus-within {
+[class*="scrollableContainer_"]:focus-within {
     border-color: var(--mc-green) !important;
     box-shadow: 0 0 8px #55ff5544 !important;
 }
@@ -146,7 +159,7 @@ a:hover,
     color: var(--mc-muted) !important;
 }
 
-/* Boutons d'action verts */
+/* Boutons d'action verts (ex: Rejoindre l'appel, Envoyer) */
 [class*="lookFilled"][class*="colorBrand"] {
     background: linear-gradient(135deg, #4caf50, #2e7d32) !important;
     color: #fff !important;
@@ -181,12 +194,13 @@ a:hover,
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--mc-bg);
+    background: rgba(0, 0, 0, 0.2);
 }
 
 ::-webkit-scrollbar-thumb {
     background: #333333;
-    border-radius: 2px;
+    border-radius: 0px; /* Minecraft n'a pas de bords arrondis ! */
+    border: 1px solid #1a1a1a;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -197,7 +211,7 @@ a:hover,
 [class*="userPopout"],
 [class*="userProfileModal"],
 [class*="standardSidebarView"] {
-    background-color: var(--mc-panel) !important;
+    background-color: rgba(30, 30, 30, 0.95) !important;
 }
 
 [class*="side"] [class*="item"]:hover {
