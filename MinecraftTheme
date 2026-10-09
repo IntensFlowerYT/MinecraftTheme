@@ -1,0 +1,213 @@
+/**
+ * @name MINECRAFT THEME FREE
+ * @author IntensFlowerYT
+ * @description Dark Minecraft theme with green accents, blocky aesthetics, custom home icon and background.
+ * @version 2.1.0
+ * @source https://github.com/IntensFlowerYT/MinecraftTheme
+ */
+
+:root {
+    /* Couleurs Minecraft (Vert Herbe / Redstone / Roche) */
+    --mc-green: #55FF55;
+    --mc-green-dark: #2e7d32;
+    --mc-green-bright: #4caf50;
+    --mc-bg: #121212;
+    --mc-panel: #1e1e1e;
+    --mc-panel-hover: #2a2a2a;
+    --mc-text: #ffffff;
+    --mc-muted: #aaaaaa;
+    
+    /* Images de fond Minecraft */
+    --mc-home-icon: url("https://raw.githubusercontent.com/IntensFlowerYT/MinecraftTheme/main/assets/minecraft-discord.png");
+    --mc-chat-bg: url("https://raw.githubusercontent.com/IntensFlowerYT/MinecraftTheme/main/assets/minecraft-bg.png");
+    --mc-dirt-bg: url("https://raw.githubusercontent.com/IntensFlowerYT/MinecraftTheme/main/assets/dirt.png");
+}
+
+/* Base & Fond principal */
+.theme-dark,
+body,
+[class*="appMount"],
+[class*="bg-"] {
+    background-color: var(--mc-bg) !important;
+    color: var(--mc-text);
+}
+
+::selection {
+    background: var(--mc-green-bright);
+    color: #000;
+}
+
+/* Panneaux latéraux */
+[class*="sidebar"],
+[class*="privateChannels"],
+[class*="panels"],
+[class*="containerDefault"] {
+    background-color: var(--mc-panel) !important;
+}
+
+/* Zone de tchat avec fond d'écran Minecraft */
+[class*="chat"],
+[class*="chatContent"],
+[class*="membersWrap"],
+[class*="contentRegion"] {
+    background-color: transparent !important;
+}
+
+[class*="chat"] {
+    background-image: var(--mc-chat-bg) !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+}
+
+/* Remplacement de l'icône Discord (Bouton Accueil) avec fond Minecraft */
+[class*="tutorialContainer"] [class*="childWrapper"] {
+    background-color: transparent !important;
+    background-image: var(--mc-home-icon), var(--mc-dirt-bg) !important;
+    background-position: center, center !important;
+    background-repeat: no-repeat, repeat !important;
+    background-size: contain, 32px 32px !important;
+    border-radius: 4px !important; /* Style bloc Minecraft */
+    transition: border-radius .18s ease, box-shadow .18s ease, transform .18s ease !important;
+    border: 2px solid #3a3a3a !important;
+}
+
+[class*="tutorialContainer"] [class*="childWrapper"] > svg {
+    display: none !important;
+}
+
+[class*="tutorialContainer"]:hover [class*="childWrapper"] {
+    border-radius: 8px !important;
+    box-shadow: 0 0 12px #55FF5588, 0 0 22px #2e7d3255 !important;
+    transform: scale(1.04);
+    border-color: var(--mc-green) !important;
+}
+
+/* Effets au survol des serveurs */
+[class*="listItem"] [class*="wrapper"] {
+    transition: transform .16s ease, filter .16s ease !important;
+}
+
+[class*="listItem"] [class*="wrapper"]:hover {
+    transform: translateY(-2px);
+    filter: drop-shadow(0 0 5px #55FF5588);
+}
+
+/* Salons et messages privés */
+[class*="interactive"]:hover,
+[class*="channel"]:hover {
+    background-color: var(--mc-panel-hover) !important;
+}
+
+[class*="modeSelected"],
+[class*="selected"] > [class*="layout"] {
+    background-color: #55ff551c !important;
+}
+
+[class*="modeSelected"] [class*="name"],
+[class*="selected"] [class*="name"] {
+    color: var(--mc-green) !important;
+}
+
+/* Titres, liens et texte */
+[class*="title"],
+[class*="header"] {
+    color: var(--mc-text);
+}
+
+a,
+[class*="anchor"] {
+    color: var(--mc-green) !important;
+}
+
+a:hover,
+[class*="anchor"]:hover {
+    color: var(--mc-green-bright) !important;
+}
+
+/* Zone de saisie de message */
+[class*="channelTextArea"] {
+    background-color: rgba(20, 20, 20, 0.85) !important;
+    border: 2px solid #333333 !important;
+    border-radius: 4px !important;
+    backdrop-filter: blur(4px);
+    transition: border-color .18s ease, box-shadow .18s ease;
+}
+
+[class*="channelTextArea"]:focus-within {
+    border-color: var(--mc-green) !important;
+    box-shadow: 0 0 8px #55ff5544 !important;
+}
+
+[class*="placeholder"] {
+    color: var(--mc-muted) !important;
+}
+
+/* Boutons principaux verts */
+[class*="lookFilled"][class*="colorBrand"] {
+    background: linear-gradient(135deg, #4caf50, #2e7d32) !important;
+    color: #fff !important;
+    border: 1px solid #1b5e20 !important;
+    border-radius: 4px !important;
+    transition: filter .15s ease, transform .15s ease;
+}
+
+[class*="lookFilled"][class*="colorBrand"]:hover {
+    filter: brightness(1.2);
+    transform: translateY(-1px);
+}
+
+/* Éléments non lus et membres */
+[class*="unreadPill"] {
+    background-color: var(--mc-green-dark) !important;
+    color: #fff !important;
+}
+
+[class*="membersGroup"] {
+    color: var(--mc-green) !important;
+}
+
+[class*="member"] [class*="layout"]:hover {
+    background-color: #55ff5514 !important;
+}
+
+/* Barres de défilement (Scrollbars) */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--mc-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333333;
+    border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--mc-green-dark);
+}
+
+/* Paramètres et profils */
+[class*="userPopout"],
+[class*="userProfileModal"],
+[class*="standardSidebarView"] {
+    background-color: var(--mc-panel) !important;
+}
+
+[class*="side"] [class*="item"]:hover {
+    background-color: var(--mc-panel-hover) !important;
+}
+
+[class*="side"] [class*="selected"] {
+    background-color: #55ff551c !important;
+    color: var(--mc-green) !important;
+}
+
+/* Effet lumineux de la barre d'outils */
+[class*="toolbar"] [class*="icon"]:hover {
+    color: var(--mc-green) !important;
+    filter: drop-shadow(0 0 4px #55ff55aa);
+}
